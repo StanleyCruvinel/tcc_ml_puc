@@ -1,5 +1,5 @@
-# TCC PucMinas Stanley Cruvinel :coffee:
-
+# TCC PucMinas -  Stanley Cruvinel :coffee:
+## Pós-graduação Lato Sensu em Ciência de Dados e Big Data
 **Conteúdo** 
 
 <!-- toc -->
