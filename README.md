@@ -1,15 +1,14 @@
-# tcc pucMinas Stanley Cruvinel
+# TCC PucMinas Stanley Cruvinel
 
-
-**Conteúdo** :coffee 
+**Conteúdo** 
 
 <!-- toc -->
 
-- [air_flowlab]#air_flowlab
+- [air_flowlab]
   - ./air_flowlab/docker-compose.yml
   - ./air_flowlab/airflow-data/dags (DAG e requirements.txt)
   - ./air_flowlab/airflow-data/files/fretes (Dados de fretes,  01/02/2021)
-- [spark_jupyterlab]#spark_jupyterlab
+- [spark_jupyterlab]
   - ./spark_jupyterlab/docker-compose.yml
   - ./spark_jupyterlab/.env
   - ./data/view/tcc_pucminas_cidades.html 
@@ -21,7 +20,7 @@
 <!-- tocstop -->
 
 ## Criando os ambientes
-- Necessário o Docker Desktop instalado. 
+- Requer instalação do Docker Desktop. 
 
 ### air_flowlab
 
