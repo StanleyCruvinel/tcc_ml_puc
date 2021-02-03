@@ -1,4 +1,4 @@
-# TCC PucMinas Stanley Cruvinel
+# TCC PucMinas Stanley Cruvinel :coffee:
 
 **Conteúdo** 
 
