@@ -1,0 +1,211 @@
+version: '3.8'
+services:
+  postgres:
+    image: postgres:latest
+    container_name: postgres
+    hostname: postgres
+    environment:
+    - POSTGRES_USER=airflow
+    - POSTGRES_DB=airflow
+    - POSTGRES_PASSWORD=airflow
+    - PGDATA=/var/lib/postgresql/data/pgdata
+    ports:
+    - 5432:5432
+    volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
+    - pg_data:/var/lib/postgresql/data/pgdata
+    - ./database/logs:/var/lib/postgresql/data/log
+    command: >
+      postgres
+      -c listen_addresses=*
+      -c logging_collector=on
+      -c log_destination=stderr
+      -c max_connections=200
+    mem_limit: 2g
+    networks:
+      airflow:
+       ipv4_address: 172.18.0.10
+
+  redis:
+    image: redis:latest
+    container_name: redis
+    hostname: redis
+    ports:
+      - 6379:6379
+    mem_limit: 1g
+    networks:
+      airflow:
+       ipv4_address: 172.18.0.11
+
+  airflow:
+    image: apache/airflow:master-python3.8
+    container_name: airflow
+    hostname: airflow
+    env_file:
+      - .env
+    restart: always
+    ports:
+      - 8080:8080
+    command:
+      - webserver
+    volumes:
+      - ./airflow-data/dags:/opt/airflow/dags
+      - air_logs:/opt/airflow/logs
+      - ./airflow-data/plugins:/opt/airflow/plugins
+      - /var/run/docker.sock:/var/run/docker.sock
+    healthcheck:
+      test: ["CMD-SHELL", "[ -f /opt/airflow/airflow-webserver.pid ]"]
+      interval: 30s
+      timeout: 30s
+      retries: 3
+    networks:
+      airflow:
+       ipv4_address: 172.18.0.20
+    mem_limit: 2g
+    depends_on:
+    - initdb
+
+  airflow-scheduler:
+    image: apache/airflow:master-python3.8
+    container_name: airflow_scheduler
+    hostname: scheduler
+    env_file:
+      - .env
+    command: scheduler
+    volumes:
+      - ./airflow-data/dags:/opt/airflow/dags
+      - air_logs:/opt/airflow/logs
+      - ./airflow-data/plugins:/opt/airflow/plugins
+      - ./airflow-data/files:/home/airflow/files  
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      airflow:
+       ipv4_address: 172.18.0.21
+    mem_limit: 2g
+    depends_on:
+      - initdb
+
+  airflow-worker1:
+    image: apache/airflow:master-python3.8
+    container_name: airflow_worker1
+    hostname: worker1
+    env_file:
+      - .env
+    command: celery worker
+    volumes:
+      - ./airflow-data/dags:/opt/airflow/dags
+      - air_logs:/opt/airflow/logs
+      - ./airflow-data/plugins:/opt/airflow/plugins
+      - ./airflow-data/files:/home/airflow/files
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      airflow:
+       ipv4_address: 172.18.0.22
+    mem_limit: 3G
+    depends_on:
+    - airflow-scheduler
+      
+#  airflow-worker2:
+#    image: apache/airflow:master-python3.8
+#    container_name: airflow_worker2
+#    hostname: worker2
+#    env_file:
+#      - .env
+#    command: celery worker
+#    volumes:
+#      - ./airflow-data/dags:/opt/airflow/dags
+#      - air_logs:/opt/airflow/logs
+#      - ./airflow-data/plugins:/opt/airflow/plugins
+#      - ./airflow-data/files:/home/airflow/files
+#      - /var/run/docker.sock:/var/run/docker.sock
+#    networks:
+#      airflow:
+#       ipv4_address: 172.18.0.23
+#    mem_limit: 3G
+#    depends_on:
+#    - airflow-scheduler
+#  
+#  airflow-worker3:
+#    image: apache/airflow:master-python3.8
+#    #image: apache/airflow:1.10.12
+#    container_name: airflow_worker3
+#    env_file:
+#      - .env
+#    command: celery worker
+#    volumes:
+#      - ./airflow-data/dags:/opt/airflow/dags
+#      - air_logs:/opt/airflow/logs
+#      - ./airflow-data/plugins:/opt/airflow/plugins
+#      - ./airflow-data/files:/home/airflow/files
+#      - /var/run/docker.sock:/var/run/docker.sock
+#    networks:
+#      - airflow
+#    mem_limit: 500mb
+#    depends_on:
+#    - airflow-scheduler
+#    - airflow-worker2
+
+  airflow-flower:
+    image: apache/airflow:master-python3.8
+    #image: apache/airflow:1.10.12
+    container_name: airflow_flower
+    hostname: flower
+    volumes:
+      - air_logs:/opt/airflow/logs
+    env_file:
+      - .env
+    command: celery flower
+    ports:
+      - 5555:5555
+    networks:
+      airflow:
+       ipv4_address: 172.18.0.31
+    mem_limit: 1g
+    depends_on:
+      - airflow-worker1
+
+  initdb:
+    image: apache/airflow:master-python3.8
+    container_name: initdb
+    env_file:
+      - .env
+    command: db init
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - airflow
+    mem_limit: 500mb
+    depends_on:
+      - postgres
+      - redis
+  
+  user:
+    image: apache/airflow:master-python3.8
+    container_name: createuser
+    env_file:
+      - .env
+    command: users create --username admin --firstname stanley --lastname cruvinel -e admin@admin.com --role Admin -p admin
+    networks:
+      - airflow
+    mem_limit: 500mb
+#    depends_on:
+#      - initdb
+
+volumes:
+  pg_data:
+  air_logs:
+
+networks:
+    airflow:
+        # use the bridge driver, but enable IPv6
+        name: airflow-net 
+        driver: bridge
+        driver_opts:
+            com.docker.network.enable_ipv6: "true"
+        ipam:
+            driver: default
+            config:
+                - subnet: 172.18.0.0/16
+                  gateway: 172.18.0.1
+                - subnet: "2001:3984:3989::/64"
+                  gateway: "2001:3984:3989::1"
