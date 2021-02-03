@@ -32,7 +32,7 @@ $ cd tcc_ml_puc
 ```console
 $ docker-compose -p p2 up --build -d postgres redis
 $ docker-compose -p p2 up --build -d initdb user
-$ docker-compose -p p2 up --build -d airflow airflow-scheduler airflow-worker1 airflow-flower
+$ docker-compose -p p2 up --build -d
 $ docker exec -it airflow_worker1 bash
     >cd dags
     >pip install -r requirements.txt
