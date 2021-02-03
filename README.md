@@ -22,6 +22,11 @@
 ## Criando os ambientes
 - Requer instalação do Docker Desktop. 
 
+```console
+$ git clone https://github.com/StanleyCruvinel/tcc_ml_puc
+$ cd tcc_ml_puc
+```
+
 ### air_flowlab
 
 ```console
