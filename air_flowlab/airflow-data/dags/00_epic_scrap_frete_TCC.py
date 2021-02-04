@@ -48,7 +48,7 @@ def extract_data (**kwargs):
         link = [div.find('a')['href']
         for div in soup.find_all('div', 'freight-card-buttons')]
         #Aqui denfine o numero de páginas, no desenvolvimento optou-se pelo número 20 Retorna qtd páginas
-        val_results = 438 #int(soup.find('h2','count-results').get_text().split(' ')[0])/len(link)
+        val_results = 5 #int(soup.find('h2','count-results').get_text().split(' ')[0])/len(link)
         valor, veiculo, carroceria, peso, natureza, tipo, km, adiantamento, origem, destino, ton = [], [], [], [], [], [], [], [], [], [], []
     def extracao(data):
         fim = False
