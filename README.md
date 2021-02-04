@@ -24,13 +24,12 @@
 
 ```console
 $ git clone https://github.com/StanleyCruvinel/tcc_ml_puc
-$ cd tcc_ml_puc
+$ cd tcc_ml_puc/air_flowlab
 ```
 
 ### air_flowlab
 
 ```console
-$ cd air_flowlab
 $ docker-compose -p p2 up --build -d postgres redis
 $ docker-compose -p p2 up --build -d initdb user
 $ docker-compose -p p2 up --build -d
