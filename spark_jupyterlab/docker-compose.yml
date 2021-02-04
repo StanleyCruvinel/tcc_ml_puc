@@ -10,7 +10,7 @@ volumes:
     driver_opts:
       type: 'none'
       o: 'bind'
-      device: '.data'
+      device: 'data'
 services:
   jupyterlab:
     image: andreper/jupyterlab:3.0.0-spark-3.0.0

@@ -52,7 +52,7 @@ $ docker-compose -p p2 up --build -d
 
 http://localhost:8888/
 
-Para o notebook 01_TCC_PUCMinas_StanleyCruvinel.ipynb instalar as bibliotecas em uma nova célula.
+No notebook 01_TCC_PUCMinas_StanleyCruvinel.ipynb instale as bibliotecas.
 
 ```
 !pip install networkx pyvis pandas
