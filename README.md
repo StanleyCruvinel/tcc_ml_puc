@@ -38,7 +38,7 @@ $ docker exec -it airflow_scheduler bash
     >cd dags
     >pip install -r requirements.txt
 $ docker ps --format "{{.Names}}"
-$ docker rm initdb user
+$ docker rm initdb createuser
 ```
 http://localhost:8080 
 
