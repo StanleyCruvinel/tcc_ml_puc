@@ -41,7 +41,7 @@ $ docker ps --format "{{.Names}}"
 $ docker rm initdb createuser
 ```
 http://localhost:8080 
-
+admin:admin
 
 ### spark_jupyterlab
 
