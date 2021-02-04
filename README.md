@@ -35,8 +35,9 @@ $ docker-compose -p p2 up --build -d postgres redis
 $ docker-compose -p p2 up --build -d initdb user
 $ docker-compose -p p2 up --build -d
 $ docker exec -it airflow_scheduler bash
-    >cd dags
-    >pip install -r requirements.txt
+    >pip install -r dags/requirements.txt
+$ docker exec -it airflow_worker1 bash
+    >pip install -r dags/requirements.txt
 $ docker ps --format "{{.Names}}"
 $ docker rm initdb createuser
 ```
