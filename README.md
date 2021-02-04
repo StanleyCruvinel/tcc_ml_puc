@@ -30,6 +30,7 @@ $ cd tcc_ml_puc
 ### air_flowlab
 
 ```console
+$ cd air_flowlab
 $ docker-compose -p p2 up --build -d postgres redis
 $ docker-compose -p p2 up --build -d initdb user
 $ docker-compose -p p2 up --build -d
@@ -48,6 +49,7 @@ http://localhost:8080
 ### spark_jupyterlab
 
 ```console
+$ cd ../spark_jupyterlab
 $ docker-compose -p p2 up --build -d 
 ```
 
