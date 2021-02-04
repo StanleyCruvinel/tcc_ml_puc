@@ -24,24 +24,24 @@
 
 ```console
 $ git clone https://github.com/StanleyCruvinel/tcc_ml_puc
-$ cd tcc_ml_puc
+$ cd tcc_ml_puc/air_flowlab
 ```
 
 ### air_flowlab
 
 ```console
-$ cd air_flowlab
 $ docker-compose -p p2 up --build -d postgres redis
 $ docker-compose -p p2 up --build -d initdb user
 $ docker-compose -p p2 up --build -d
 $ docker exec -it airflow_scheduler bash
-    >cd dags
-    >pip install -r requirements.txt
+    >pip install -r dags/requirements.txt
+$ docker exec -it airflow_worker1 bash
+    >pip install -r dags/requirements.txt
 $ docker ps --format "{{.Names}}"
 $ docker rm initdb createuser
 ```
 http://localhost:8080 
-
+admin:admin
 
 ### spark_jupyterlab
 
@@ -51,6 +51,13 @@ $ docker-compose -p p2 up --build -d
 ```
 
 http://localhost:8888/
+
+Para o notebook 01_TCC_PUCMinas_StanleyCruvinel.ipynb instalar as bibliotecas em uma nova célula.
+
+```
+!pip install networkx pyvis pandas
+```
+
 
 ### se precisar de UI para visualizar o ambiente.
 
