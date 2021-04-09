@@ -30,9 +30,9 @@ $ cd tcc_ml_puc/air_flowlab
 ### air_flowlab
 
 ```console
-$ docker-compose -p p2 up --build -d postgres redis
-$ docker-compose -p p2 up --build -d initdb user
-$ docker-compose -p p2 up --build -d
+$ docker compose -p p2 up --build -d postgres redis
+$ docker compose -p p2 up --build -d initdb user
+$ docker compose -p p2 up --build -d
 $ docker exec -it airflow_scheduler bash
     >pip install -r dags/requirements.txt
     >exit
@@ -49,7 +49,7 @@ admin:admin
 
 ```console
 $ cd ../spark_jupyterlab
-$ docker-compose -p p2 up --build -d 
+$ docker compose -p p2 up --build -d 
 ```
 # Jupyter Lab
 http://localhost:8888/
