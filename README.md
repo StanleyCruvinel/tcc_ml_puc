@@ -35,8 +35,10 @@ $ docker-compose -p p2 up --build -d initdb user
 $ docker-compose -p p2 up --build -d
 $ docker exec -it airflow_scheduler bash
     >pip install -r dags/requirements.txt
+    >exit
 $ docker exec -it airflow_worker1 bash
     >pip install -r dags/requirements.txt
+    >exit
 $ docker ps --format "{{.Names}}"
 $ docker rm initdb createuser
 ```
