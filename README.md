@@ -30,9 +30,9 @@ $ cd tcc_ml_puc/air_flowlab
 ### air_flowlab
 
 ```console
-$ docker compose -p p2 up --build -d postgres redis
-$ docker compose -p p2 up --build -d initdb user
-$ docker compose -p p2 up --build -d
+$ docker-compose -p p2 up --build -d postgres redis
+$ docker-compose -p p2 up --build -d initdb user
+$ docker-compose -p p2 up --build -d
 $ docker exec -it airflow_scheduler bash
     >pip install -r dags/requirements.txt
     >exit
@@ -57,7 +57,7 @@ http://localhost:8888/
 **UI Spark**
 http://localhost:4040
   **Master**
-    http://localhost:8080
+     http://localhost:8080
   **Worker1**
     http://localhost:8081
   **Worker2**
