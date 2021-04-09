@@ -40,7 +40,7 @@ $ docker exec -it airflow_worker1 bash
 $ docker ps --format "{{.Names}}"
 $ docker rm initdb createuser
 ```
-http://localhost:8080 
+http://localhost:8088 
 admin:admin
 
 ### spark_jupyterlab
