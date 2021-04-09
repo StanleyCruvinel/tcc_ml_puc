@@ -51,8 +51,17 @@ admin:admin
 $ cd ../spark_jupyterlab
 $ docker-compose -p p2 up --build -d 
 ```
-
+# Jupyter Lab
 http://localhost:8888/
+
+**UI Spark**
+http://localhost:4040
+  **Master**
+    http://localhost:8080
+  **Worker1**
+    http://localhost:8081
+  **Worker2**
+    http://localhost:8082
 
 No notebook 01_TCC_PUCMinas_StanleyCruvinel.ipynb instale as bibliotecas.
 
