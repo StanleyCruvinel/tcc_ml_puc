@@ -51,7 +51,6 @@ services:
     volumes:
       - ./airflow-data/dags:/opt/airflow/dags
       - air_logs:/opt/airflow/logs
-      - ./airflow-data/plugins:/opt/airflow/plugins
       - /var/run/docker.sock:/var/run/docker.sock
     healthcheck:
       test: ["CMD-SHELL", "[ -f /opt/airflow/airflow-webserver.pid ]"]
@@ -75,7 +74,6 @@ services:
     volumes:
       - ./airflow-data/dags:/opt/airflow/dags
       - air_logs:/opt/airflow/logs
-      - ./airflow-data/plugins:/opt/airflow/plugins
       - ./airflow-data/files:/home/airflow/files  
       - /var/run/docker.sock:/var/run/docker.sock
     networks:
@@ -95,7 +93,6 @@ services:
     volumes:
       - ./airflow-data/dags:/opt/airflow/dags
       - air_logs:/opt/airflow/logs
-      - ./airflow-data/plugins:/opt/airflow/plugins
       - ./airflow-data/files:/home/airflow/files
       - /var/run/docker.sock:/var/run/docker.sock
     networks:
@@ -193,6 +190,7 @@ services:
 
 volumes:
   pg_data:
+  pg_logs:
   air_logs:
 
 networks:
