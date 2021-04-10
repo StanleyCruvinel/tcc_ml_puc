@@ -49,7 +49,7 @@ admin:admin
 
 ```console
 $ cd ../spark_jupyterlab
-$ docker compose -p p2 up --build -d 
+$ docker-compose -p p2 up --build -d 
 ```
 # Jupyter Lab
 http://localhost:8888/
