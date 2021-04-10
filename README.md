@@ -73,7 +73,7 @@ No notebook 01_TCC_PUCMinas_StanleyCruvinel.ipynb instale as bibliotecas.
 ### se precisar de UI para visualizar o ambiente.
 
 ```console
-$ docker run -d -p 9002:9000 --name=portainer -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data  portainer/portainer-ce:2.0.0-alpine
+$ docker run -d -p 9002:9000 --name=portainer -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data  portainer/portainer-ce:2.1.1-alpine
 ```
 
 http://localhost:9002
